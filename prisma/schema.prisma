@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(uuid()) @db.Uuid
+  telegramUserId BigInt    @unique @map("telegram_user_id")
+  telegramChatId BigInt?   @map("telegram_chat_id")
+  username       String?   @db.VarChar(255)
+  firstName      String    @map("first_name") @db.VarChar(255)
+  lastName       String?   @map("last_name") @db.VarChar(255)
+  isActive       Boolean   @default(true) @map("is_active")
+  registeredAt   DateTime  @default(now()) @map("registered_at") @db.Timestamptz
+  lastSeenAt     DateTime? @map("last_seen_at") @db.Timestamptz
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  settings     UserSettings?
+  categories   Category[]
+  transactions Transaction[]
+
+  @@index([isActive])
+  @@map("users")
+}
+
+model UserSettings {
+  id                String   @id @default(uuid()) @db.Uuid
+  userId            String   @unique @map("user_id") @db.Uuid
+  languageCode      String   @default("uz") @map("language_code") @db.VarChar(10)
+  currencyCode      String   @default("UZS") @map("currency_code") @db.VarChar(10)
+  timezone          String   @default("Asia/Tashkent") @db.VarChar(64)
+  defaultReportType String   @default("month") @map("default_report_type") @db.VarChar(20)
+  reportFormat      String   @default("pdf") @map("report_format") @db.VarChar(10)
+  createdAt         DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt         DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
+model Category {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  name      String   @db.VarChar(100)
+  type      String   @db.VarChar(20)
+  isSystem  Boolean  @default(false) @map("is_system")
+  isActive  Boolean  @default(true) @map("is_active")
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@unique([userId, type, name])
+  @@index([userId, type, isActive])
+  @@map("categories")
+}
+
+model Transaction {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @map("user_id") @db.Uuid
+  categoryId  String   @map("category_id") @db.Uuid
+  type        String   @db.VarChar(20)
+  amountMinor BigInt   @map("amount_minor")
+  note        String?  @db.Text
+  occurredAt  DateTime @map("occurred_at") @db.Timestamptz
+  source      String   @default("manual") @db.VarChar(20)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id])
+
+  @@index([userId, occurredAt(sort: Desc)])
+  @@index([userId, type, occurredAt(sort: Desc)])
+  @@index([userId, categoryId, occurredAt(sort: Desc)])
+  @@map("transactions")
+}

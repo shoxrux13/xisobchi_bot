@@ -1,0 +1,131 @@
+{
+  "welcome": "👋 Xarajat Bot ga xush kelibsiz, <b>{name}</b>!\n\nDaromad va xarajatlaringizni kuzatib boraman.\n\n/help — barcha buyruqlar",
+  "welcome_back": "👋 Qaytganingiz bilan, <b>{name}</b>!",
+  "help": "📋 <b>Buyruqlar:</b>\n\n💰 /income — Daromad qo'shish\n💸 /expense — Xarajat qo'shish\n📊 /balance — Balansni ko'rish\n📈 /report — Joriy oy hisoboti\n📅 /report_month — Muayyan oy hisoboti\n📂 /categories — Kategoriyalar\n⚙️ /settings — Sozlamalar\n❓ /help — Yordam",
+  "cancel_success": "❌ Bekor qilindi.",
+  "private_only": "⚠️ Bu bot faqat shaxsiy suhbatda ishlaydi.",
+  "income": {
+    "ask_amount": "💰 Daromad miqdorini kiriting:\n\nMasalan: <code>500000</code>",
+    "ask_category": "📂 Daromad kategoriyasini tanlang:",
+    "ask_note": "📝 Izoh kiriting (ixtiyoriy):\n\nIzoh yozing yoki <b>/skip</b> bosing",
+    "saved": "✅ Daromad saqlandi!\n\n💰 Miqdor: <b>{amount} {currency}</b>\n📂 Kategoriya: <b>{category}</b>{note}\n\n💼 Joriy balans: <b>{balance} {currency}</b>",
+    "invalid_amount": "❌ Noto'g'ri miqdor. Musbat son kiriting.\n\nMasalan: <code>500000</code>"
+  },
+  "expense": {
+    "ask_amount": "💸 Xarajat miqdorini kiriting:\n\nMasalan: <code>50000</code>",
+    "ask_category": "📂 Xarajat kategoriyasini tanlang:",
+    "ask_note": "📝 Izoh kiriting (ixtiyoriy):\n\nIzoh yozing yoki <b>/skip</b> bosing",
+    "saved": "✅ Xarajat saqlandi!\n\n💸 Miqdor: <b>{amount} {currency}</b>\n📂 Kategoriya: <b>{category}</b>{note}\n\n💼 Qolgan balans: <b>{balance} {currency}</b>",
+    "invalid_amount": "❌ Noto'g'ri miqdor. Musbat son kiriting.\n\nMasalan: <code>50000</code>"
+  },
+  "note_text": "\n📝 Izoh: {note}",
+  "balance": {
+    "title": "💼 <b>Sizning Balansingiz</b>\n\n",
+    "income_label": "💰 Jami daromad: <b>{amount} {currency}</b>\n",
+    "expense_label": "💸 Jami xarajat: <b>{amount} {currency}</b>\n",
+    "net_label": "📊 Sof qoldiq: <b>{amount} {currency}</b>",
+    "no_data": "📭 Hali hech qanday tranzaksiya yo'q."
+  },
+  "report": {
+    "title": "📊 <b>Hisobot: {period}</b>\n\n",
+    "income_line": "💰 Daromad: <b>{amount} {currency}</b>\n",
+    "expense_line": "💸 Xarajat: <b>{amount} {currency}</b>\n",
+    "balance_line": "📈 Balans: <b>{amount} {currency}</b>",
+    "by_expense_category": "\n\n📂 <b>Xarajatlar kategoriyalar bo'yicha:</b>",
+    "by_income_category": "\n\n📂 <b>Daromadlar kategoriyalar bo'yicha:</b>",
+    "category_row": "\n  • {name}: <b>{amount} {currency}</b>",
+    "no_transactions": "📭 Bu davr uchun ma'lumot topilmadi.",
+    "ask_month": "📅 Oyni kiriting (YYYY-MM formatida):\n\nMasalan: <code>2026-03</code>",
+    "invalid_month": "❌ Noto'g'ri format. YYYY-MM shaklida kiriting.\n\nMasalan: <code>2026-03</code>"
+  },
+  "pdf": {
+    "title": "Xarajat va Daromad Hisoboti — {period}",
+    "date_label": "PDF tayyorlangan sana: {date}",
+    "general_section": "Umumiy ko'rsatkichlar",
+    "col_indicator": "Ko'rsatkich",
+    "col_amount": "Miqdor ({currency})",
+    "col_date": "Sana",
+    "col_time": "Vaqt",
+    "row_income": "Daromad",
+    "row_expense": "Xarajat",
+    "row_balance": "Balans",
+    "expense_section": "Xarajatlar kategoriyalar bo'yicha",
+    "income_section": "Daromadlar kategoriyalar bo'yicha",
+    "col_expense_cat": "Xarajat kategoriyasi",
+    "col_income_cat": "Daromad kategoriyasi",
+    "col_note": "Izoh"
+  },
+  "settings": {
+    "title": "⚙️ <b>Sozlamalar</b>\n\n🌐 Til: <b>{language}</b>\n💱 Valyuta: <b>{currency}</b>\n🕐 Vaqt zonasi: <b>{timezone}</b>\n\nNimani o'zgartirmoqchisiz?",
+    "language": {
+      "ask": "🌐 Tilni tanlang:",
+      "changed": "✅ Til o'zgartirildi: O'zbekcha"
+    },
+    "currency": {
+      "ask": "💱 Valyutani tanlang:",
+      "changed": "✅ Valyuta o'zgartirildi: {currency}"
+    },
+    "timezone": {
+      "ask": "🕐 Vaqt zonasini kiriting:\n\nMasalan: <code>Asia/Tashkent</code>, <code>Europe/Moscow</code>, <code>UTC</code>",
+      "changed": "✅ Vaqt zonasi o'zgartirildi: {timezone}",
+      "invalid": "❌ Noto'g'ri vaqt zonasi. To'g'ri nom kiriting."
+    },
+    "format": {
+      "ask": "Hisobotni qay formatda olishni xohlaysiz?",
+      "updated": "✅ Hisobot formati ozgartirildi"
+    }
+  },
+  "categories": {
+    "income_title": "💰 <b>Daromad kategoriyalari:</b>\n\n",
+    "expense_title": "💸 <b>Xarajat kategoriyalari:</b>\n\n",
+    "empty": "Kategoriyalar topilmadi.",
+    "names": {
+      "salary": "Maosh",
+      "bonus": "Bonus",
+      "gift": "Sovg'a",
+      "other_income": "Boshqa daromad",
+      "food": "Oziq-ovqat",
+      "transport": "Transport",
+      "home": "Uy-joy",
+      "health": "Sog'liq",
+      "education": "Ta'lim",
+      "entertainment": "Ko'ngil ochar",
+      "credit": "Kredit to'lovi",
+      "other_expense": "Boshqa xarajat"
+    }
+  },
+  "errors": {
+    "general": "❌ Xatolik yuz berdi. Qayta urinib ko'ring.",
+    "cancelled": "❌ Bekor qilindi."
+  },
+  "buttons": {
+    "cancel": "❌ Bekor qilish",
+    "skip": "⏭ O'tkazib yuborish",
+    "change_language": "🌐 Til",
+    "change_currency": "💱 Valyuta",
+    "change_timezone": "🕐 Vaqt zonasi",
+    "menu_income": "💰 Daromad (oylik)",
+    "menu_expense": "💸 Xarajat",
+    "menu_balance": "📊 Balans",
+    "menu_report_month": "📅 Muayyan oy",
+    "menu_categories": "📂 Kategoriyalar",
+    "menu_settings": "⚙️ Sozlamalar",
+    "menu_help": "❓ Yordam",
+    "menu_report_short": "📊 Hisobotlar",
+    "report_today": "Bugun",
+    "report_yesterday": "Kecha",
+    "report_week": "Hafta",
+    "report_month": "Joriy oy",
+    "report_custom_month": "Boshqa oy",
+    "change_format": "📄 Hisobot formati"
+  },
+  "history": {
+    "title": "🗓 Oxirgi {count} ta tranzaksiya:",
+    "empty": "📭 Hali hech narsa kiritilmadi.",
+    "item": "{index}. {type} <b>{amount}</b> {currency}\n   📁 {category} | 🕒 {date}{note}",
+    "type_expense": "🔴",
+    "type_income": "🟢",
+    "deleted": "✅ Tranzaksiya o'chirildi.",
+    "not_found": "❌ Tranzaksiya topilmadi yoki allaqachon o'chirilgan."
+  }
+}

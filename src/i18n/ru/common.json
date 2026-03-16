@@ -1,0 +1,131 @@
+{
+  "welcome": "👋 Добро пожаловать в Expense Bot, <b>{name}</b>!\n\nЯ помогу отслеживать ваши доходы и расходы.\n\n/help — все команды",
+  "welcome_back": "👋 С возвращением, <b>{name}</b>!",
+  "help": "📋 <b>Команды:</b>\n\n💰 /income — Добавить доход\n💸 /expense — Добавить расход\n📊 /balance — Проверить баланс\n📈 /report — Отчёт за текущий месяц\n📅 /report_month — Отчёт за выбранный месяц\n📂 /categories — Категории\n⚙️ /settings — Настройки\n❓ /help — Помощь",
+  "cancel_success": "❌ Отменено.",
+  "private_only": "⚠️ Этот бот работает только в личных сообщениях.",
+  "income": {
+    "ask_amount": "💰 Введите сумму дохода:\n\nПример: <code>500000</code>",
+    "ask_category": "📂 Выберите категорию дохода:",
+    "ask_note": "📝 Добавьте заметку (необязательно):\n\nВведите заметку или <b>/skip</b>",
+    "saved": "✅ Доход сохранён!\n\n💰 Сумма: <b>{amount} {currency}</b>\n📂 Категория: <b>{category}</b>{note}\n\n💼 Текущий баланс: <b>{balance} {currency}</b>",
+    "invalid_amount": "❌ Неверная сумма. Введите положительное число.\n\nПример: <code>500000</code>"
+  },
+  "expense": {
+    "ask_amount": "💸 Введите сумму расхода:\n\nПример: <code>50000</code>",
+    "ask_category": "📂 Выберите категорию расхода:",
+    "ask_note": "📝 Добавьте заметку (необязательно):\n\nВведите заметку или <b>/skip</b>",
+    "saved": "✅ Расход сохранён!\n\n💸 Сумма: <b>{amount} {currency}</b>\n📂 Категория: <b>{category}</b>{note}\n\n💼 Остаток баланса: <b>{balance} {currency}</b>",
+    "invalid_amount": "❌ Неверная сумма. Введите положительное число.\n\nПример: <code>50000</code>"
+  },
+  "note_text": "\n📝 Заметка: {note}",
+  "balance": {
+    "title": "💼 <b>Ваш Баланс</b>\n\n",
+    "income_label": "💰 Всего доходов: <b>{amount} {currency}</b>\n",
+    "expense_label": "💸 Всего расходов: <b>{amount} {currency}</b>\n",
+    "net_label": "📊 Чистый остаток: <b>{amount} {currency}</b>",
+    "no_data": "📭 Транзакций пока нет."
+  },
+  "report": {
+    "title": "📊 <b>Отчёт: {period}</b>\n\n",
+    "income_line": "💰 Доходы: <b>{amount} {currency}</b>\n",
+    "expense_line": "💸 Расходы: <b>{amount} {currency}</b>\n",
+    "balance_line": "📈 Баланс: <b>{amount} {currency}</b>",
+    "by_expense_category": "\n\n📂 <b>Расходы по категориям:</b>",
+    "by_income_category": "\n\n📂 <b>Доходы по категориям:</b>",
+    "category_row": "\n  • {name}: <b>{amount} {currency}</b>",
+    "no_transactions": "📭 Транзакций за этот период не найдено.",
+    "ask_month": "📅 Введите месяц в формате YYYY-MM:\n\nПример: <code>2026-03</code>",
+    "invalid_month": "❌ Неверный формат. Используйте YYYY-MM.\n\nПример: <code>2026-03</code>"
+  },
+  "pdf": {
+    "title": "Отчёт о доходах и расходах — {period}",
+    "date_label": "PDF создан: {date}",
+    "general_section": "Общие показатели",
+    "col_indicator": "Показатель",
+    "col_amount": "Сумма ({currency})",
+    "col_date": "Дата",
+    "col_time": "Время",
+    "row_income": "Доходы",
+    "row_expense": "Расходы",
+    "row_balance": "Баланс",
+    "expense_section": "Расходы по категориям",
+    "income_section": "Доходы по категориям",
+    "col_expense_cat": "Категория расходов",
+    "col_income_cat": "Категория доходов",
+    "col_note": "Примечание"
+  },
+  "settings": {
+    "title": "⚙️ <b>Настройки</b>\n\n🌐 Язык: <b>{language}</b>\n💱 Валюта: <b>{currency}</b>\n🕐 Часовой пояс: <b>{timezone}</b>\n\nЧто изменить?",
+    "language": {
+      "ask": "🌐 Выберите язык:",
+      "changed": "✅ Язык изменён: Русский"
+    },
+    "currency": {
+      "ask": "💱 Выберите валюту:",
+      "changed": "✅ Валюта изменена: {currency}"
+    },
+    "timezone": {
+      "ask": "🕐 Введите часовой пояс:\n\nПримеры: <code>Asia/Tashkent</code>, <code>Europe/Moscow</code>, <code>UTC</code>",
+      "changed": "✅ Часовой пояс изменён: {timezone}",
+      "invalid": "❌ Неверный часовой пояс. Введите правильное название."
+    },
+    "format": {
+      "ask": "В каком формате вы хотите получать отчет?",
+      "updated": "✅ Формат отчета изменен"
+    }
+  },
+  "categories": {
+    "income_title": "💰 <b>Категории доходов:</b>\n\n",
+    "expense_title": "💸 <b>Категории расходов:</b>\n\n",
+    "empty": "Категории не найдены.",
+    "names": {
+      "salary": "Зарплата",
+      "bonus": "Бонус",
+      "gift": "Подарок",
+      "other_income": "Прочие доходы",
+      "food": "Еда",
+      "transport": "Транспорт",
+      "home": "Жильё",
+      "health": "Здоровье",
+      "education": "Образование",
+      "entertainment": "Развлечения",
+      "credit": "Погашение кредита",
+      "other_expense": "Прочие расходы"
+    }
+  },
+  "errors": {
+    "general": "❌ Произошла ошибка. Попробуйте ещё раз.",
+    "cancelled": "❌ Отменено."
+  },
+  "buttons": {
+    "cancel": "❌ Отмена",
+    "skip": "⏭ Пропустить",
+    "change_language": "🌐 Язык",
+    "change_currency": "💱 Валюта",
+    "change_timezone": "🕐 Часовой пояс",
+    "menu_income": " 💰 Доход (ежемесячно)",
+    "menu_expense": "💸 Расход",
+    "menu_balance": "📊 Баланс",
+    "menu_report_month": "📅 Выбрать месяц",
+    "menu_categories": "📂 Категории",
+    "menu_settings": "⚙️ Настройки",
+    "menu_help": "❓ Помощь",
+    "menu_report_short": "📊 Hisobotlar",
+    "report_today": "Bugun",
+    "report_yesterday": "Kecha",
+    "report_week": "Hafta",
+    "report_month": "Joriy oy",
+    "report_custom_month": "Boshqa oy",
+    "change_format": "📄 Формат отчета"
+  },
+  "history": {
+    "title": "🗓 Последние {count} транзакций:",
+    "empty": "📭 Пока ничего не добавлено.",
+    "item": "{index}. {type} <b>{amount}</b> {currency}\n   📁 {category} | 🕒 {date}{note}",
+    "type_expense": "🔴",
+    "type_income": "🟢",
+    "deleted": "✅ Транзакция удалена.",
+    "not_found": "❌ Транзакция не найдена или уже удалена."
+  }
+}

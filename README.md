@@ -1,0 +1,10 @@
+Kunlik va haftalik hisobot. Hozir report logikasi asosan oyga qaratilgan reports.service.ts. Telegram bot uchun Bugun, Kecha, Bu hafta, O‘tgan hafta tugmalari juda qulay bo‘ladi.
+Oxirgi tranzaksiyalar ro‘yxati. Hozir create va aggregate bor, lekin tarixni ko‘rish, edit qilish yoki o‘chirish oqimi yo‘q transactions.service.ts. Kamida Oxirgi 10 ta, O‘chirish, Tahrirlash, Yana shu kabi tugmalar kerak.
+Undo va quick repeat. Hozir income/expense oqimi amount → category → note ko‘rinishida income.scene.ts va expense.scene.ts da yuradi. Saqlangandan keyin 30 soniya ichida Bekor qilish, Oxirgisini takrorlash, Oxirgi kategoriyani qayta ishlatish katta qulaylik beradi.
+Kategoriya boshqaruvi. Hozir kategoriyalar default yaratiladi va list qilinadi, lekin user o‘zi qo‘sha olmaydi yoki tartiblay olmaydi categories.service.ts, telegram.update.ts. Kategoriya qo‘shish, nomini o‘zgartirish, yashirish, tartiblash kerak.
+Budget va limitlar. Masalan oziq-ovqat uchun oyiga limit qo‘yish, 80 foizga yetganda ogohlantirish yuborish. Bu odamlarni botga qayta-qayta kirishga majbur qiladigan eng foydali funksiyalardan biri.
+Aqlli analitika. Faqat jami summa emas, balki O‘tgan haftaga nisbatan, eng ko‘p xarajat qilingan kategoriya, kunlik o‘rtacha xarajat, oy oxirigacha taxminiy qoldiq kabi insightlar kerak.
+Sana tanlab kiritish. Ko‘p user xarajatni o‘sha zahoti emas, keyinroq yozadi. Bugun, Kecha, Boshqa sana tanlash bo‘lsa ancha qulay bo‘ladi.
+Recurring yozuvlar va reminder. Maosh, ijara, kredit to‘lovi kabi narsalarni avtomatik kiritish yoki eslatib turish foydali.
+CSV yoki Excel export. PDF chiroyli, lekin ko‘p user keyin Excelga tushirib ko‘rishni xohlaydi.
+Tabiiy matndan kiritish. Masalan Bir kunda taksiga 45 ming, Maosh 7 mln tushdi kabi bitta gapdan transaction yaratish keyingi bosqich uchun juda kuchli UX.

@@ -1,0 +1,1 @@
+const fs = require("fs"); ["uz", "ru", "en"].forEach(lang => { let file = "src/i18n/" + lang + "/common.json"; let content = fs.readFileSync(file, "utf8"); content = content.replace(/\"\s+??/g, "\"??"); fs.writeFileSync(file, content); });

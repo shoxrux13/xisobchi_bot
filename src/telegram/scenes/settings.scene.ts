@@ -105,6 +105,13 @@ export class SettingsScene {
       return;
     }
 
+    if (data === 'settings:history') {
+      await ctx.scene.leave();
+      // Dispatch the /history command back to TelegramUpdate
+      await this.telegramUpdate.onHistory(ctx as any);
+      return;
+    }
+
     if (data.startsWith('lang:')) {
       const code = data.slice(5);
       await this.userSettingsService.updateLanguage(state.userId!, code);

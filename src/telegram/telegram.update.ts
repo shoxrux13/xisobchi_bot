@@ -209,7 +209,7 @@ export class TelegramUpdate {
                   lang,
                 }) as string)
               : c.name;
-          return `  вЂў ${name}`;
+          return `  • ${name}`;
         })
         .join('\n');
 
@@ -265,9 +265,133 @@ export class TelegramUpdate {
     }
   }
 
-  // в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
+  // ----------------------------------------------------------------------
+  // /history
+  // ----------------------------------------------------------------------
+  @Command('history')
+  async onHistory(@Ctx() ctx: BotCtx): Promise<void> {
+    if (!this.isPrivate(ctx)) return;
+    const { user, settings } = await this.onboardingService.ensureUser(ctx.from!, ctx.chat?.id);
+    const lang = settings.languageCode;
+    const currency = settings.currencyCode;
+
+    const txs = await this.transactionsService.getLastTransactions(user.id, 10);
+    
+    if (txs.length === 0) {
+      await ctx.reply(this.t(lang, 'history.empty', { defaultValue: 'You have no transactions.' }), { parse_mode: 'HTML' });
+      return;
+    }
+
+    let msg = this.t(lang, 'history.title', { defaultValue: '<b>Last 10 transactions:</b>' }) + '\n\n';
+    const inlineKeyboard: any[][] = [];
+    let buttonsRow: any[] = [];
+
+    txs.forEach((tx, index) => {
+      const isIncome = tx.type === TransactionType.INCOME;
+      const amountStr = formatAmount(tx.amountMinor);
+      const sign = isIncome ? '+' : '-';
+      const catName = tx.category.isSystem 
+        ? this.i18n.translate(`common.categories.names.${tx.category.name}`, { lang }) 
+        : tx.category.name;
+        
+      const dateStr = formatDateTime(tx.occurredAt, settings.timezone);
+      
+      msg += `<b>${index + 1}.</b> ${dateStr} - <i>${catName}</i>\n`;
+      msg += `${sign}${amountStr} ${currency}\n`;
+      if (tx.note) {
+        msg += `Izoh: ${tx.note}\n`;
+      }
+      msg += '\n';
+
+      buttonsRow.push({
+        text: '❌ ' + (index + 1),
+        callback_data: 'del_tx:' + tx.id
+      });
+
+      if (buttonsRow.length === 5) {
+        inlineKeyboard.push(buttonsRow);
+        buttonsRow = [];
+      }
+    });
+
+    if (buttonsRow.length > 0) {
+      inlineKeyboard.push(buttonsRow);
+    }
+
+    inlineKeyboard.push([{
+      text: this.t(lang, 'history.clear_all', { defaultValue: '🗑 Barchasini o\'chirish' }),
+      callback_data: 'del_tx_all'
+    }]);
+
+    await ctx.reply(msg, {
+      parse_mode: 'HTML',
+      reply_markup: {
+        inline_keyboard: inlineKeyboard
+      }
+    });
+  }
+
+  @Action(/^del_tx:(.+)$/)
+  async onDeleteTxAction(@Ctx() ctx: BotCtx & { match: RegExpExecArray }): Promise<void> {
+    const txId = ctx.match[1];
+    await ctx.answerCbQuery().catch(() => {});
+    
+    const { user, settings } = await this.onboardingService.ensureUser(ctx.from!, ctx.chat?.id);
+    const tx = await this.transactionsService.getTransactionById(txId, user.id);
+    
+    if (!tx || tx.userId !== user.id) {
+      await ctx.reply(this.t(settings.languageCode, 'history.not_found', { defaultValue: 'Transaction not found or already deleted.' }));
+      return;
+    }
+
+    await this.transactionsService.deleteTransaction(txId, user.id);
+    await ctx.reply(this.t(settings.languageCode, 'history.deleted', { defaultValue: 'Transaction deleted.' }));
+
+    // Re-trigger history so it updates
+    await this.onHistory(ctx);
+  }
+
+  @Action('del_tx_all')
+  async onDeleteAllTxAction(@Ctx() ctx: BotCtx): Promise<void> {
+    await ctx.answerCbQuery().catch(() => {});
+    
+    // Add confirmation keyboard
+    const { settings } = await this.onboardingService.ensureUser(ctx.from!, ctx.chat?.id);
+    const lang = settings.languageCode;
+    
+    await ctx.reply(this.t(lang, 'history.confirm_clear_all', { defaultValue: 'Rostdan ham barcha tranzaksiyalarni o\'chirmoqchimisiz? Bu amalni bekor qilib bo\'lmaydi.' }), {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: '⚠️ ' + this.t(lang, 'buttons.yes_clear_all', { defaultValue: 'Ha, hammasini o\'chirish' }), callback_data: 'confirm_del_all' },
+            { text: '❌ ' + this.t(lang, 'buttons.cancel', { defaultValue: 'Bekor qilish' }), callback_data: 'cancel_del_all' }
+          ]
+        ]
+      }
+    });
+  }
+
+  @Action('confirm_del_all')
+  async onConfirmDeleteAllAction(@Ctx() ctx: BotCtx): Promise<void> {
+    await ctx.answerCbQuery().catch(() => {});
+    const { user, settings } = await this.onboardingService.ensureUser(ctx.from!, ctx.chat?.id);
+    const lang = settings.languageCode;
+    
+    await this.transactionsService.deleteAllTransactions(user.id);
+    await ctx.editMessageText(this.t(lang, 'history.all_deleted', { defaultValue: 'Barcha tranzaksiyalar muvaffaqiyatli o\'chirildi.' }));
+    await this.onHistory(ctx);
+  }
+
+  @Action('cancel_del_all')
+  async onCancelDeleteAllAction(@Ctx() ctx: BotCtx): Promise<void> {
+    await ctx.answerCbQuery().catch(() => {});
+    const { settings } = await this.onboardingService.ensureUser(ctx.from!, ctx.chat?.id);
+    await ctx.editMessageText(this.t(settings.languageCode, 'cancel_success', { defaultValue: 'Amal bekor qilindi.' }));
+  }
+
+  // ----------------------------------------------------------------------
   // Helpers
-  // в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
+  // ----------------------------------------------------------------------
   private isPrivate(ctx: BotCtx): boolean {
     return ctx.chat?.type === 'private';
   }

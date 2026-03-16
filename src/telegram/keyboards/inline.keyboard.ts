@@ -35,6 +35,12 @@ export function settingsKeyboard(lang: string, i18n: I18nService): InlineKeyboar
     inline_keyboard: [
       [
         {
+          text: i18n.translate('common.buttons.menu_history', { lang }) as string,
+          callback_data: 'settings:history',
+        },
+      ],
+      [
+        {
           text: i18n.translate('common.buttons.change_language', { lang }) as string,
           callback_data: 'settings:language',
         },
@@ -122,6 +128,7 @@ export function mainMenuKeyboard(lang: string, i18n: I18nService): ReplyKeyboard
       [{ text: t('menu_income') }, { text: t('menu_expense') }],
       [{ text: t('menu_balance') }, { text: t('menu_report_short') }],
       [{ text: t('menu_categories') }, { text: t('menu_settings') }],
+      [{ text: t('menu_help') }],
     ],
     resize_keyboard: true,
     one_time_keyboard: false,

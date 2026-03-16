@@ -117,7 +117,9 @@
     "report_week": "Hafta",
     "report_month": "Joriy oy",
     "report_custom_month": "Boshqa oy",
-    "change_format": "📄 Hisobot formati"
+    "change_format": "📄 Hisobot formati",
+    "menu_history": "📋 Tarix",
+    "yes_clear_all": "Ha, o'chirish"
   },
   "history": {
     "title": "🗓 Oxirgi {count} ta tranzaksiya:",
@@ -126,6 +128,9 @@
     "type_expense": "🔴",
     "type_income": "🟢",
     "deleted": "✅ Tranzaksiya o'chirildi.",
-    "not_found": "❌ Tranzaksiya topilmadi yoki allaqachon o'chirilgan."
+    "not_found": "❌ Tranzaksiya topilmadi yoki allaqachon o'chirilgan.",
+    "clear_all": "🗑 Barchasini o'chirish",
+    "confirm_clear_all": "Rostdan ham barcha tranzaksiyalarni o'chirmoqchimisiz? Bu amalni bekor qilib bo'lmaydi.",
+    "all_deleted": "✅ Barcha tranzaksiyalar muvaffaqiyatli o'chirildi."
   }
 }

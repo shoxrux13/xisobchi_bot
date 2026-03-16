@@ -68,6 +68,12 @@ export class TransactionsService {
     });
   }
 
+  async deleteAllTransactions(userId: string) {
+    return this.prisma.transaction.deleteMany({
+      where: { userId },
+    });
+  }
+
   async getTransactionById(txId: string, userId: string) {
     return this.prisma.transaction.findFirst({
       where: { id: txId, userId },

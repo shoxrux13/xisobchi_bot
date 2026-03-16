@@ -117,7 +117,9 @@
     "report_week": "Hafta",
     "report_month": "Joriy oy",
     "report_custom_month": "Boshqa oy",
-    "change_format": "📄 Формат отчета"
+    "change_format": "📄 Формат отчета",
+    "menu_history": "📋 История",
+    "yes_clear_all": "Да, удалить"
   },
   "history": {
     "title": "🗓 Последние {count} транзакций:",
@@ -126,6 +128,9 @@
     "type_expense": "🔴",
     "type_income": "🟢",
     "deleted": "✅ Транзакция удалена.",
-    "not_found": "❌ Транзакция не найдена или уже удалена."
+    "not_found": "❌ Транзакция не найдена или уже удалена.",
+    "clear_all": "🗑 Удалить всё",
+    "confirm_clear_all": "Вы действительно хотите удалить все транзакции? Это действие нельзя отменить.",
+    "all_deleted": "✅ Все транзакции успешно удалены."
   }
 }

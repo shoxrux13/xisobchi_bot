@@ -117,7 +117,9 @@
     "report_week": "Hafta",
     "report_month": "Joriy oy",
     "report_custom_month": "Boshqa oy",
-    "change_format": "📄 Report Format"
+    "change_format": "📄 Report Format",
+    "menu_history": "📋 History",
+    "yes_clear_all": "Yes, clear"
   },
   "history": {
     "title": "🗓 Last {count} transactions:",
@@ -126,6 +128,9 @@
     "type_expense": "🔴",
     "type_income": "🟢",
     "deleted": "✅ Transaction deleted.",
-    "not_found": "❌ Transaction not found or already deleted."
+    "not_found": "❌ Transaction not found or already deleted.",
+    "clear_all": "🗑 Clear All",
+    "confirm_clear_all": "Are you sure you want to delete all transactions? This action cannot be undone.",
+    "all_deleted": "✅ All transactions have been successfully deleted."
   }
 }
